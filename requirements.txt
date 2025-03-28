@@ -1,0 +1,6 @@
+pyaudio
+SpeechRecognition
+Pillow
+matplotlib
+imgaeio
+PySimpleGUI
