@@ -1,0 +1,12 @@
+{
+    "name": "Python Dev Container",
+    "image": "mcr.microsoft.com/devcontainers/python:3.11-bullseye",
+    "extensions": [
+      "ms-python.python",
+      "ms-toolsai.jupyter"
+    ],
+    "settings": {
+      "terminal.integrated.shell.linux": "/bin/bash"
+    },
+    "postCreateCommand": "pip install -r requirements.txt"
+  }
