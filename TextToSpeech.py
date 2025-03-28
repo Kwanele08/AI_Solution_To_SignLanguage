@@ -1,12 +1,10 @@
 import pyttsx3
 
 def TextToSpeech(text):
-    SpeachEngine = pyttsx3.init()
-    SpeachEngine.setProperty('rate', 150)
-    SpeachEngine.setProperty('volume', 1.0)
+    SpeechEngine = pyttsx3.init()
+    SpeechEngine.setProperty('rate', 150)
+    SpeechEngine.setProperty('volume', 1.0)
 
-    SpeachEngine.say(text)
-    SpeachEngine.runAndWait()
+    SpeechEngine.say(text)
+    SpeechEngine.runAndWait()
 
-text = 'Hello, My name is Bob'
-TextToSpeech(text)
