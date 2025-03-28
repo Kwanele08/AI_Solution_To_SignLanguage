@@ -3,7 +3,6 @@ from PIL import Image
 import json
 import webbrowser
 
-
 SignDictionary = {
     'A': r'C:\Users\HP\Desktop\Code\Hands\A.jpeg',
     'B': r'C:\Users\HP\Desktop\Code\Hands\B.jpeg',
@@ -42,24 +41,28 @@ SignDictionary = {
     '9': r'C:\Users\HP\Desktop\Code\Hands\9.jpeg',
     '0': r'C:\Users\HP\Desktop\Code\Hands\0.jpeg'
 }
-with open("WLASL_v0.3.json", 'r') as data:
+
+# Load the sign language dataset
+with open("WLASL_v0.3.json", 'r', encoding='utf-8') as data:
     sign_data = json.load(data)
 
-def  GetSignVideo(text):
-    for enter in sign_data:
-        if enter['gloss'].upper() == text.upper():
-            if "instances" in enter and enter["instances"]:
-                return enter["instances"][0]["url"]
-    return None
+def GetSignVideos(text):
+    videos = []
+    for entry in sign_data:
+        if entry['gloss'].strip().lower() == text.strip().lower():
+            if "instances" in entry and entry["instances"]:
+                videos.extend([instance["url"] for instance in entry["instances"] if "url" in instance])
+    return videos if videos else None
 
-def PlayVideo(sent):
+def PlayVideos(sent):
     texts = sent.upper().split()
     for text in texts:
-        video_url = GetSignVideo(text)
-        if video_url:
-            webbrowser.open(video_url)
+        video_urls = GetSignVideos(text)
+        if video_urls:
+            for url in video_urls:
+                webbrowser.open(url)  # Opens each video link
         else:
-            print(f"No sign video found for the word {text}.")
+            print(f"Sorry, no sign video found for the word {text}.")
 
 def TextToSign(text):
     text = text.upper()
@@ -71,9 +74,10 @@ def TextToSign(text):
             images.append(img)
     return images
 
+# Test input
 text = input("Input text: ").upper()
 
-if len(text) <2:
+if len(text) < 2:
     TextToSign(text)
 else:
-    PlayVideo(text)
+    PlayVideos(text)
