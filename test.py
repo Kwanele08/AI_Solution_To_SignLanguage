@@ -3,7 +3,7 @@ from cvzone.HandTrackingModule import HandDetector #to crop wherever hand ends
 from cvzone.ClassificationModule import Classifier
 import numpy as np
 import math
-#import TextToSpeech.py
+from TextToSpeech import TextToSpeech
 
 cap=cv2.VideoCapture(0) #id of webcam
 detector= HandDetector(maxHands=1) #only detects one hand
@@ -46,6 +46,7 @@ while True:
             imgWhite[:, wGap:wCal+wGap] = imgResize
             prediction ,index =classifier.getPrediction(imgWhite, draw=False)
             print(prediction,index)
+            TextToSpeech(labels[index])
 
 
 
@@ -59,6 +60,7 @@ while True:
             hGap = math.ceil((imgSize - hCal) / 2)
             imgWhite[hGap:hCal + hGap, :] = imgResize
             prediction, index = classifier.getPrediction(imgWhite, draw=False)
+            TextToSpeech(labels[index])
 
         cv2.rectangle(imgOutput, (x - offset, y - offset-50), (x - offset+ 90 ,y - offset-50+50), (255, 0, 255), cv2.FILLED)
         cv2.putText(imgOutput,labels[index],(x,y-26),cv2.FONT_HERSHEY_COMPLEX, 1.7,(255,255,255), 2)
@@ -68,4 +70,3 @@ while True:
 
     cv2.imshow("Image", imgOutput)
     cv2.waitKey(1) #delay
-    #TextToSpeech(prediction)
