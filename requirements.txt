@@ -2,5 +2,5 @@ pyaudio
 SpeechRecognition
 Pillow
 matplotlib
-imgaeio
+imageio
 PySimpleGUI
