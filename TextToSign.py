@@ -48,6 +48,7 @@ SignDictionary = {
 with open("WLASL_v0.3.json", 'r', encoding='utf-8') as data:
     sign_data = json.load(data)
 
+
 def GetSignVideos(text):
     videos = []
     for entry in sign_data:
@@ -62,9 +63,10 @@ def PlayVideos(sent):
         video_urls = GetSignVideos(text)
         if video_urls:
             for url in video_urls:
-                webbrowser.open(url)  # Opens each video link
+                webbrowser.open(url)
         else:
-            print(f"Sorry, no sign video found for the word {text}.")
+            print(f"Sorry, no sign video found for the word '{text}'.")
+
 
 def TextToSign(text):
     text = text.upper()
